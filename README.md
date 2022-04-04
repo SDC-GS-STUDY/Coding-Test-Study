@@ -1,4 +1,4 @@
-![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=Coding-Test-Study&fontAlign=60&fontAlignY=35&color=gradient)
+![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=Coding-Test-Study&fontAlign=60&fontAlignY=35&color=auto)
 
 
 ## 📣 소개 [LINK](https://woolly-lavender-310.notion.site/C-743cb8a5eae34c9da5bafafbe80ea6d0)    [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/SDC-GS-STUDY/Coding-Test-Study&count_bg=%23BC9DD5&title_bg=%23686868&icon=visualstudiocode.svg&icon_color=%23BB83D5&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
