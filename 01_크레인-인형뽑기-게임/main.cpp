@@ -1,67 +1,91 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
-int picked(int index, vector<vector<int>>& board)
+class User
 {
-    int cnt = 1;
-    for (int i = 0; i < board.size(); i++)
+private:
+   vector<int> inputBuff; //moves
+   int pckItem;//뽑은 인형
+public:
+    User(vector<int> _inputBuff)
+        :inputBuff(_inputBuff),pckItem(0)
     {
-        if (board[i][index-1] != 0)//행[열index] 로 비어있지 않으면
+
+    }
+
+    bool pick(vector<vector<int>>& _board) //인형뽑기에 성공하면 true, 실패하면 false
+    {
+        int index = inputBuff[0];
+        inputBuff.erase(inputBuff.begin());
+
+        for (int i = 0; i < _board.size(); i++)
         {
-            int ret; //return 값 임시 저장
-            ret = board[i][index - 1];
-            board[i][index - 1] = 0;//꺼내졌으므로 해당자리는 0
-            return ret;//리턴!
+            if (_board[i][index - 1] != 0)//행[열index] 로 비어있지 않으면
+            {
+                int ret; //return 값 임시 저장
+                pckItem = _board[i][index - 1];
+                _board[i][index - 1] = 0;//꺼내졌으므로 해당자리는 0
+
+                return true;//리턴!
+            }
         }
+        return false;
     }
 
-    //for (auto &row : myboard) //행 순회
-    //{
-    //    for (auto &column : row)
-    //    {
-    //        if (column != 0 && index == cnt)//행[열index] 로 비어있지 않으면
-    //        {
-    //            int ret; //return 값 임시 저장
-    //            ret = column;
-    //            column = 0;//꺼내졌으므로 해당자리는 0
-    //            return ret;//리턴!
-    //        }
-    //        cnt++;
-    //    }
-    //    cnt = 1;
-    //}
+    const int getpckItem() { return pckItem; }
 
-}
-
-int solution(vector<vector<int>> board, vector<int> moves) {
-    int answer = 0;
-    vector<int> basket;
-
-    //바구니에 담기
-    for (auto index : moves)
+    const bool isEnd()
     {
-        basket.push_back(picked(index, board));
+        if (inputBuff.empty())
+            return false;
+        return true;
+    }
+};
+
+class Machine
+{
+private:
+    vector<vector<int>> board;
+    stack<int> basket;
+    
+    User* user;
+
+    int answer;
+public:
+    Machine(User* _user, vector<vector<int>> _board):user(_user),answer(0)
+    {
+        board = _board;
     }
 
-    //같은 인형 연속으로(2개이상)있으면 삭제하기.
-    for (int i = 1; i < basket.size(); i++)
+    void update()
     {
-        int prev = basket[i - 1]; //이전인형
-        if (basket[i] == prev)
+        while (user->isEnd())
         {
-            answer += 2;
-            i++; //prev가 비었기 떄문에 인덱스 값을 하나 더 늘려준다.
+            if (!user->pick(board)) continue;
+
+            if (!basket.empty() && basket.top() == user->getpckItem())
+            {
+                basket.pop();
+                answer += 2;
+            }
+            else
+                basket.push(user->getpckItem());
+            
         }
 
+        cout << answer << endl;
     }
-    return answer;
-}//[[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]]
-//0 비어있음
-//1 네오 : 2 무지 : 3 튜브 : 4 어피치 : 5 프로도
+};
+
+
 int main()
 {
-    cout<<solution({ {0, 0, 0, 0, 0},{0, 0, 1, 0, 3},{0, 2, 5, 0, 1},{4, 2, 4, 4, 2},{3, 5, 1, 3, 1} }, { 1, 5, 3, 5, 1, 2, 1, 4 })<<endl;
+    User* user = new User({ 1, 5, 3, 5, 1, 2, 1, 4 });
+    Machine* game = new Machine(user, { {0, 0, 0, 0, 0},{0, 0, 1, 0, 3},{0, 2, 5, 0, 1},{4, 2, 4, 4, 2},{3, 5, 1, 3, 1} });
+
+    game->update();
 }
