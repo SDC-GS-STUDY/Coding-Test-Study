@@ -56,16 +56,16 @@ private:
 
     int answer;
 public:
-    Machine(User* _user, vector<vector<int>> board):user(_user),answer(0)
+    Machine(User* _user, vector<vector<int>> _board):user(_user),answer(0)
     {
-
+        board = _board;
     }
 
     void update()
     {
         while (user->isEnd())
         {
-            if (user->pick(board)) continue;
+            if (!user->pick(board)) continue;
 
             if (!basket.empty() && basket.top() == user->getpckItem())
             {
@@ -74,6 +74,7 @@ public:
             }
             else
                 basket.push(user->getpckItem());
+            
         }
 
         cout << answer << endl;
