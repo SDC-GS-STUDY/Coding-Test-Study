@@ -3,6 +3,10 @@
 
 using namespace std;
 
+class sujin
+{
+
+};
 int solution(vector<vector<int>> board, vector<int> moves) {
     int answer = 0;
     vector<int> basket;
