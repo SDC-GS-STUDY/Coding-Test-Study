@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c723f576-002c-4a1c-9415-9d7b7537b1ce}</ProjectGuid>
-    <RootNamespace>CT</RootNamespace>
+    <ProjectGuid>{6b153f72-d16d-4e11-8a2a-67ac4570619b}</ProjectGuid>
+    <RootNamespace>ctopenchat</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,13 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dollGame.cpp" />
-    <ClCompile Include="exercise1.cpp" />
-    <ClCompile Include="solution220410.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="dollGame.h" />
-    <ClInclude Include="exercise1.h" />
+    <ClCompile Include="solution.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
