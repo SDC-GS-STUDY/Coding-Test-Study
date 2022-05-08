@@ -2,50 +2,52 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <map>
 
 using namespace std;
 
 vector<string> solution(vector<string> record) {
 
     vector<string> answer;
+    map<string, string> map;
 
-    vector<string> id; // id 저장 벡터
-
-    string s;
-
-    if (record[0] == "Enter")
+    // id를 key값으로 모든 이름이 입력 혹은 변경되어 map을 구성함
+    for (vector<string>::iterator it = record.begin(); it != record.end(); ++it)
     {
-        s = record.back(); // 닉네임 반환
+        stringstream ss(*it);
+        string command, id, name;
 
-        // 답안 벡터에 추가
-        answer.push_back(s);
-        answer.push_back("님이 들어왔습니다");
+        ss >> command; // 자료형의 공백을 기준으로 나눠서 저장해줌, 한번 잘려짐
 
-        id.push_back(record[1]); // id 저장
-    }
-    else if (record[0] == "Leave")
-    {
-        for (int i = 0; i < id.size(); i++)
+        if (command == "Enter") // Enter라면
         {
-            if (id[i] == record[i]) // id가 있다면
-            {
-                s = record.back(); // 닉네임 반환
-
-                // 답안 벡터에 추가
-                answer.push_back(s);
-                answer.push_back("님이 나갔습니다");
-
-                id.pop_back(); // id 삭제
-            }
-            else // 아이디가 없다면
-            {
-                // 아무것도 안함
-            }
+            ss >> id >> name; // id랑 name으로 자름
+            map[id] = name; // id를 key값으로 name value 추가
+        }
+        else if (command == "Change")
+        {
+            ss >> id >> name;
+            map[id] = name; // id를 key값으로 덮어씌움
         }
     }
-    else if (record[0] == "Change")
+
+    for (vector<string>::iterator it = record.begin(); it != record.end(); ++it)
     {
-        
+        stringstream ss(*it);
+        string command, id, name;
+
+        ss >> command;
+
+        if (command == "Enter")
+        {
+            ss >> id; // id를 map에서 읽어와야함
+            answer.push_back(map[id] + "님이 들어왔습니다.");
+        }
+        else if (command == "Leave")
+        {
+            ss >> id;
+            answer.push_back(map[id] + "님이 나갔습니다.");
+        }
     }
 
     return answer;
@@ -53,22 +55,19 @@ vector<string> solution(vector<string> record) {
 
 int main()
 {
-    vector<string> answer;
+    vector<string> record;
+    record.push_back("Enter uid1234 Muzi");
+    record.push_back("Enter uid4567 Prodo");
+    record.push_back("Leave uid1234");
+    record.push_back("Enter uid1234 Prodo");
+    record.push_back("Change uid4567 Ryan");
 
-    string s;
-    getline(cin, s); // 공백포함 문자열 받기
+    vector<string> sol = solution(record);
 
-    stringstream temp(s);
-
-    string split;
-
-    while (temp >> split)
+    for (vector<string>::iterator it = sol.begin(); it != sol.end(); ++it)
     {
-        answer.push_back(split); // 벡터에 넣기
-        //cout << split << endl;
+        cout << (*it) << endl;
     }
-
-    solution(answer);// 드디어 벡터 문제에 넣기
 
     return 0;
 }
