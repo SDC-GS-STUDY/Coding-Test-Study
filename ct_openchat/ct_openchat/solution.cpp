@@ -67,6 +67,7 @@ int main()
     for (vector<string>::iterator it = sol.begin(); it != sol.end(); ++it)
     {
         cout << (*it) << endl;
+        
     }
 
     return 0;
