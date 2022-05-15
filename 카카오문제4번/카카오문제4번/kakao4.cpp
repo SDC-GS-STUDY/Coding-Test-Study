@@ -14,7 +14,11 @@ int timeCulator(string IN, string OUT) {
     int hourOUT = stoi(OUT.substr(0, 2));
     int minuteOUT = stoi(OUT.substr(3, 2));
 
+<<<<<<< Updated upstream
     int accumlateTime = (hourOUT - hourIN) * 60 + (minuteOUT - minuteOUT);
+=======
+    int accumlateTime = (hourOUT - hourIN) * 60 + (minuteOUT - minuteIN);
+>>>>>>> Stashed changes
 
     return accumlateTime;
     
