@@ -26,17 +26,14 @@ int fee_chalc(vector<int> fees,int cumul_time)
     //fees : 기본시간, 기본요금, 단위시간, 단위요금
     int fee = fees[1];
     if (cumul_time <= fees[0]) return fee;
-
     fee += ceil(float(cumul_time - fees[0]) / (float)fees[2]) * fees[3];
-
     return fee;
 }
 
 vector<int> solution(vector<int> fees, vector<string> records) {
     vector<int> answer;
     map<string, string> In_Log; //출입기록{차량번호, 시간}
-    map<string, int> fee_data; //요금기록{차량번호, 누적시간}, 기본이 오름차순
-
+    map<string, int> fee_data; //요금기록{차량번호, 누적시간->주차요금}, 기본이 오름차순
     //1. use <sstream> to pharsing data
     for (auto data : records)
     {
@@ -53,8 +50,8 @@ vector<int> solution(vector<int> fees, vector<string> records) {
         } //출차일 경우
         else if (dt[2] == "OUT" && In_Log.find(dt[1]) != In_Log.end())
         {
-            //1. In_Log에서 해당 차량 번호를 검색한다. 11:02
-            int t_in_H = stoi(In_Log[dt[1]].substr(0, 2));//str->int
+            //1. In_Log에서 해당 차량 번호를 검색한다.
+            int t_in_H = stoi(In_Log[dt[1]].substr(0, 2));
             int t_in_m = stoi(In_Log[dt[1]].substr(3, 2));
             int t_out_H = stoi(dt[0].substr(0, 2));
             int t_out_m = stoi(dt[0].substr(3, 2));
@@ -62,7 +59,7 @@ vector<int> solution(vector<int> fees, vector<string> records) {
             //누적시간(분 계산)
             int hour;
             int minute;
-            if (t_in_m > t_out_m)// 들어온 시간 : 11: 58   나간시간: 13:03
+            if (t_in_m >= t_out_m)
             {
                 minute = t_out_m + 60 - t_in_m;
                 hour = t_out_H - t_in_H - 1;
@@ -103,7 +100,7 @@ vector<int> solution(vector<int> fees, vector<string> records) {
         {
             fee_data[data.first] += hour * 60 + minute;
         }
-        else//처음 들어온 차량이라면?
+        else//처음 들어오 ㄴ차량이라면?
         {
             fee_data.insert({ data.first ,hour * 60 + minute });
         }
@@ -112,14 +109,13 @@ vector<int> solution(vector<int> fees, vector<string> records) {
     for (auto fee : fee_data)
     {
         answer.push_back(fee_chalc(fees, fee.second));
-
     }
     return answer;
 }
 
 int main()
 {
-    //solution({ 180, 5000, 10, 600 }, { "05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN", "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT" });
-    solution({ 180, 5000, 10, 600 },{ "05:34 5961 IN", "06:34 5961 OUT", "07:34 5961 IN", "08:34 5961 OUT", "09:34 5961 IN", "10:34 5961 OUT", "11:34 5961 IN", "12:34 5961 OUT" });
+    solution({ 180, 5000, 10, 600 }, { "05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN", "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT" });
+   // solution({ 180, 5000, 10, 600 },{ "05:34 5961 IN", "06:34 5961 OUT", "07:34 5961 IN", "08:34 5961 OUT", "09:34 5961 IN", "10:34 5961 OUT", "11:34 5961 IN", "12:34 5961 OUT" });
     return 0;
 }
