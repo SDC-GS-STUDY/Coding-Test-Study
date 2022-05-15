@@ -44,7 +44,7 @@ vector<string> solution(vector<string> record) {
 		
 		if (user_info.find(getData(data,1).first) != user_info.end()) //info에 이미 기록이 있을경우
 		{
-			//기록이 있다면 Enter와 Change일 경우가 있다.
+			//기록이 있다면 Leave와 Change일 경우가 있다.
 			pair<string, string> tmpDT = getData(data, 0);//{state, uID)
 			if (tmpDT.first == "Change")
 			{
@@ -62,6 +62,7 @@ vector<string> solution(vector<string> record) {
 	}
 
 	//Printing Result
+
 	for (auto data : record)
 	{
 		pair<string, string> tmpDT = getData(data, 0);//{state, uID)
@@ -80,7 +81,7 @@ vector<string> solution(vector<string> record) {
 			continue;
 		answer.push_back(s_log);
 
-		//cout << s_log << endl;
+		cout << s_log << endl;
 	}
 	return answer;
 }
