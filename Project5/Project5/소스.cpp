@@ -1,4 +1,4 @@
-ï»¿#include <string>
+#include <string>
 #include <vector>
 #include <map>
 #include <cmath>
@@ -8,18 +8,18 @@
 using namespace std;
 
 int timeChange(string in, string out) {
-    int hour = stoi(out.substr(0, 2)) - stoi(in.substr(0, 2)); //ì‹œê°„
-    int min = stoi(out.substr(3, 2)) - stoi(in.substr(3, 2)); //ë¶„
+    int hour = stoi(out.substr(0, 2)) - stoi(in.substr(0, 2)); //½Ã°£
+    int min = stoi(out.substr(3, 2)) - stoi(in.substr(3, 2)); //ºÐ
 
     //substr -> string.substr(start,length)
-    //ë¬¸ìžì—´ ì¤‘ ì²«ë²ˆì§¸ ì¸ìž(start)ì—ì„œë¶€í„° ë‘ë²ˆì§¸ ì¸ìž(length)ê¹Œì§€ì˜ êµ¬ê°„ì— í•´ë‹¹í•˜ëŠ” ë¬¸ìžì—´ì„ ë°˜í™˜í•œë‹¤. 
-    //lengthë¥¼ ì§€ì •í•˜ì§€ ì•Šìœ¼ë©´ startì—ì„œë¶€í„° ë¬¸ìžì—´ ì „ì²´ë¥¼ ì²˜ë¦¬êµ¬ê°„ìœ¼ë¡œ ê°„ì£¼í•œë‹¤.
-    //startê°€ ì–‘ìˆ˜ì¼ ê²½ìš°, ë¬¸ìžì˜ ê¸¸ì´ ë³´ë‹¤ ìž‘ìœ¼ë©´ ë¹ˆë¬¸ìžì—´ì´ ë¦¬í„´ëœë‹¤.
-    //startê°€ ìŒìˆ˜ì¼ ê²½ìš°, startì˜ indexëŠ” ë¬¸ìžì—´ì˜ ë’¤ì—ì„œë¶€í„° ì‹œìž‘ëœë‹¤.
+    //¹®ÀÚ¿­ Áß Ã¹¹øÂ° ÀÎÀÚ(start)¿¡¼­ºÎÅÍ µÎ¹øÂ° ÀÎÀÚ(length)±îÁöÀÇ ±¸°£¿¡ ÇØ´çÇÏ´Â ¹®ÀÚ¿­À» ¹ÝÈ¯ÇÑ´Ù. 
+    //length¸¦ ÁöÁ¤ÇÏÁö ¾ÊÀ¸¸é start¿¡¼­ºÎÅÍ ¹®ÀÚ¿­ ÀüÃ¼¸¦ Ã³¸®±¸°£À¸·Î °£ÁÖÇÑ´Ù.
+    //start°¡ ¾ç¼öÀÏ °æ¿ì, ¹®ÀÚÀÇ ±æÀÌ º¸´Ù ÀÛÀ¸¸é ºó¹®ÀÚ¿­ÀÌ ¸®ÅÏµÈ´Ù.
+    //start°¡ À½¼öÀÏ °æ¿ì, startÀÇ index´Â ¹®ÀÚ¿­ÀÇ µÚ¿¡¼­ºÎÅÍ ½ÃÀÛµÈ´Ù.
 
     int result = hour * 60 + min;
     return result;
-    //ì‹œê°„ x 60í•´ì„œ ë¶„ìœ¼ë¡œ ë§Œë“¤ì–´ì£¼ê³  ë¶„ë„ ì°¨ì´ë¥¼ ë”í•´ì¤˜ì„œ ì°¨ì´ê°’ì„ ê²°ê³¼ë¡œ ë°›ì•„ì¤€ë‹¤. 
+    //½Ã°£ x 60ÇØ¼­ ºÐÀ¸·Î ¸¸µé¾îÁÖ°í ºÐµµ Â÷ÀÌ¸¦ ´õÇØÁà¼­ Â÷ÀÌ°ªÀ» °á°ú·Î ¹Þ¾ÆÁØ´Ù. 
 }
 
 
@@ -28,7 +28,7 @@ vector<int> solution(vector<int> fees, vector<string> records) {
     vector<int> answer;
     vector<pair<string, int>> temp;
 
-    map<string, vector<string>> a; //ë²ˆí˜¸ , ì‹œê°„[] 1234/ 12:00 
+    map<string, vector<string>> a; //¹øÈ£ , ½Ã°£[] 1234/ 12:00 
     map<string, int> b;
 
 
