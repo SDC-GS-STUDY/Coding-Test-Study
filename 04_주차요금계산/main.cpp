@@ -70,7 +70,14 @@ vector<int> solution(vector<int> fees, vector<string> records) {
                 hour = t_out_H - t_in_H;
             }
 
-            fee_data.insert({ dt[1] ,hour * 60 + minute });
+            if (fee_data.find(dt[1]) != fee_data.end())
+            {
+                fee_data[dt[1]] += hour * 60 + minute;
+            }
+            else//처음 들어온 차량이라면?
+            {
+                fee_data.insert({ dt[1] ,hour * 60 + minute });
+            }
 
             In_Log.erase(dt[1]); //출차 했으면 삭제.
         }
@@ -92,8 +99,6 @@ vector<int> solution(vector<int> fees, vector<string> records) {
         if (fee_data.find(data.first) != fee_data.end())
         {
             fee_data[data.first] += hour * 60 + minute;
-            int tmep = fee_data[data.first];
-            int i = 10;
         }
         else//처음 들어오 ㄴ차량이라면?
         {
