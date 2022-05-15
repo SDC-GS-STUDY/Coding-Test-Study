@@ -11,15 +11,17 @@ using namespace std;
 //map은 자동 정렬 
 //중복되면 나란히 저장됨 
 
+
 vector<string> solution(vector<string> record) {
     vector<string> answer;
 
-    vector<pair<string, string>> user; // 행동 아이디
-    unordered_map<string, string> idName; // 아이디 이름 
+    vector<pair<string, string>> user; // 행동 아이디 enter uid 1234 
+    unordered_map<string, string> idName; // 아이디 이름  1234 muzi
 
-    for (int i = 0; i < record.size(); i++) {
+    for (int i = 0; i < record.size(); i++) {  // auto: 범위 기반 반복문 
 
         vector<string> split;
+
         stringstream ss(record[i]); // 나뉜거 배열로 만들어 주기 
         string a; // string으로 stringstream 해주면 enter/ uid1234/ muzi 이런식으로 나뉨 
         while (ss >> a) {
@@ -40,7 +42,7 @@ vector<string> solution(vector<string> record) {
         result += idName[user[i].second]; //아이디 
 
 
-        if (user[i].first == "Enter")
+        if (user[i].first == "Enter") // 행동 
         {
             result += "님이 들어왔습니다."; 
         }
