@@ -1,4 +1,4 @@
-﻿//https://www.lifencoding.com/language/22?p=1 에서 문자열 쪼개는거 힌트 얻음
+﻿// https://www.lifencoding.com/language/22?p=1 에서 문자열 쪼개는거 힌트 얻음
 #include <string>
 #include <vector>
 #include <sstream>
